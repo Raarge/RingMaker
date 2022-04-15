@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RingMaker.ViewModels"
+             x:DataType="viewmodels:RuneCalcViewModel"
+             x:Class="RingMaker.Views.RuneCalcPage"
+             Title="Rune Calculation Page"
+             BackgroundColor="Black">
+    <ContentPage.BindingContext>
+        <viewmodels:RuneCalcViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="Center"
+            Text="Chose Levels From and To"
+            FontAttributes="Bold"
+            FontSize="Title"
+            TextColor="Goldenrod"
+            VerticalOptions="Center"/>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>
