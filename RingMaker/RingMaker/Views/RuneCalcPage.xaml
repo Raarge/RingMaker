@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
         
-        <Label
+            <Label
             Grid.Row="0"
             Grid.ColumnSpan="2"
             HorizontalOptions="Center"
@@ -34,6 +34,66 @@
             FontSize="Title"
             TextColor="Goldenrod"
             VerticalOptions="Center"/>
+
+            <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            Text="Enter Starting Level"
+            BackgroundColor="White"
+            VerticalTextAlignment="Center"
+            VerticalOptions="FillAndExpand" />
+
+            <Entry
+                x:Name="startLevel"
+                Placeholder="Start Level"
+                Grid.Row="1"
+                Grid.Column="1"
+                MaxLength="3"
+                Keyboard="Numeric"
+                BackgroundColor="White"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center" />
+
+            <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            Text="Enter Desired Level"
+            BackgroundColor="White"
+            VerticalTextAlignment="Center"
+            VerticalOptions="FillAndExpand" />
+
+            <Entry
+                x:Name="endLevel"
+                Placeholder="Desired Level"
+                Grid.Row="2"
+                Grid.Column="1"
+                MaxLength="3"
+                Keyboard="Numeric"
+                BackgroundColor="White"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center" />
+
+            <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            FontSize="Title"
+            Text="Runes Required"
+            TextColor="Goldenrod"
+            VerticalTextAlignment="Center"
+            VerticalOptions="FillAndExpand" />
+            
+            
+                
+                
 
         </Grid>
     </ScrollView>
