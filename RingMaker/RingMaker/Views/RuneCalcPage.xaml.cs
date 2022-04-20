@@ -15,10 +15,9 @@ namespace RingMaker.Views
         public RuneCalcPage()
         {
             InitializeComponent();
-
             
         }
 
-       
+               
     }
 }
