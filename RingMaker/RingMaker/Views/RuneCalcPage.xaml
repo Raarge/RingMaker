@@ -12,7 +12,7 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <Grid>
+        <Grid Margin="20, 50, 20, 10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
@@ -84,7 +84,6 @@
 
             <Button
                 x:Name="btnCalculateButton"
-                Command ="{Binding DisplayResults}"
                 Text="Calculate Runes" 
                 TextColor="Black"
                 BackgroundColor="Goldenrod"
@@ -109,7 +108,7 @@
             <Label
                 x:DataType="viewmodels:RuneCalcViewModel"
                 x:Name="CalcResults"
-                Text="{Binding DisplayText}"
+                Text="Testing"
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.RowSpan="2"

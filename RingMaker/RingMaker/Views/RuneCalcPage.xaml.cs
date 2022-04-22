@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RingMaker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,13 @@ namespace RingMaker.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RuneCalcPage : ContentPage
     {
+        public RuneInfo RuneCalc { get; set; }
         public RuneCalcPage()
         {
             InitializeComponent();
             
         }
+
 
                
     }
