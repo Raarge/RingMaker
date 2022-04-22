@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:RingMaker.ViewModels"
              x:DataType="viewmodels:RuneCalcViewModel"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="RingMaker.Views.RuneCalcPage"
              Title="Rune Calculation Page"
              BackgroundColor="Black">
@@ -83,6 +84,7 @@
 
             <Button
                 x:Name="btnCalculateButton"
+                Command ="{Binding DisplayResults}"
                 Text="Calculate Runes" 
                 TextColor="Black"
                 BackgroundColor="Goldenrod"
@@ -105,12 +107,13 @@
             VerticalOptions="FillAndExpand" />
 
             <Label
+                x:DataType="viewmodels:RuneCalcViewModel"
                 x:Name="CalcResults"
+                Text="{Binding DisplayText}"
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.RowSpan="2"
                 Grid.ColumnSpan="2"
-                IsVisible="False"
                 BackgroundColor="White"
                 TextColor="Black" />
 
