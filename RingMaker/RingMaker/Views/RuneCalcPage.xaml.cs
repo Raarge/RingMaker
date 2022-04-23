@@ -17,10 +17,24 @@ namespace RingMaker.Views
         public RuneCalcPage()
         {
             InitializeComponent();
+
             
+
+
         }
 
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            RuneCalc = new RuneInfo
+            {
+                LevelFrom = Convert.ToInt32(startLevel.Text),
+                LevelTo = Convert.ToInt32(endLevel.Text),
+                RunesRequired = "To go from " + startLevel.Text + " to level " + endLevel.Text +".  You will need xxxxxx runes."
 
+
+            };
+            OnPropertyChanged();
+        }
                
     }
 }

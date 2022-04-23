@@ -8,6 +8,6 @@ namespace RingMaker.Models
     {
         public int LevelFrom { get; set; }
         public int LevelTo { get; set; }
-        public int RunesRequired { get; set; }
+        public string RunesRequired { get; set; }
     }
 }
