@@ -1,5 +1,4 @@
-﻿using RingMaker.Services;
-using RingMaker.Views;
+﻿using RingMaker.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,7 +12,7 @@ namespace RingMaker
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            
             MainPage = new AppShell();
         }
 
