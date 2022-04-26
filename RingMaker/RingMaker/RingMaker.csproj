@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="D:\Pictures\ProjectPictures\RingMaker\RingMakerIcon.png">
+    <None Include="..\RingMaker.Android\Resources\drawable\RingMakerIcon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

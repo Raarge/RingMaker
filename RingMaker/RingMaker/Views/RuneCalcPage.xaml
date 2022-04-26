@@ -10,7 +10,7 @@
         <viewmodels:RuneCalcViewModel/>
     </ContentPage.BindingContext>
 
-    <ScrollView>
+    <StackLayout>
         <Grid Margin="20, 50, 20, 10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
@@ -43,6 +43,7 @@
             FontAttributes="Bold"
             HorizontalTextAlignment="Center"
             Text="Enter Starting Level"
+            TextColor="Black"
             BackgroundColor="White"
             VerticalTextAlignment="Center"
             VerticalOptions="FillAndExpand" />
@@ -51,11 +52,13 @@
                 x:Name="startLevel"
                 Text="{Binding LevelFrom, Mode=TwoWay}"
                 Placeholder="From Level"
+                PlaceholderColor="Black"
                 Grid.Row="1"
                 Grid.Column="1"
                 MaxLength="3"
                 Keyboard="Numeric"
                 BackgroundColor="White"
+                TextColor="Black"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center" />
 
@@ -65,6 +68,7 @@
             FontAttributes="Bold"
             HorizontalTextAlignment="Center"
             Text="Enter Desired Level"
+            TextColor="Black"
             BackgroundColor="White"
             VerticalTextAlignment="Center"
             VerticalOptions="FillAndExpand" />
@@ -73,11 +77,13 @@
                 x:Name="endLevel"
                 Text="{Binding LevelTo, Mode=TwoWay}"
                 Placeholder="Desired Level"
+                PlaceholderColor="black"
                 Grid.Row="2"
                 Grid.Column="1"
                 MaxLength="3"
                 Keyboard="Numeric"
                 BackgroundColor="White"
+                TextColor="Black"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center" />
 
@@ -119,7 +125,7 @@
 
             <Label
                 x:Name="CalcResults"
-                Text="{Binding RunesRequired, Mode=TwoWay}"
+                Text="{Binding RunesRequired, Mode=OneWay}"
                 FontAttributes="Bold"
                 FontSize="Medium"
                 IsVisible="False"
@@ -131,5 +137,5 @@
                 TextColor="Black" />
 
         </Grid>
-    </ScrollView>
+    </StackLayout>
 </ContentPage>

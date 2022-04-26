@@ -5,7 +5,12 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingMaker.Android", "RingMaker\RingMaker.Android\RingMaker.Android.csproj", "{85B0F8B4-A464-487A-919A-B233ED14BEF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingMaker", "RingMaker\RingMaker\RingMaker.csproj", "{004E5B55-FD1F-48F8-AD1B-D76246507F4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RingMaker", "RingMaker\RingMaker\RingMaker.csproj", "{004E5B55-FD1F-48F8-AD1B-D76246507F4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E4BBA05-8048-4C6A-AB92-27E8AAFEF47B}"
+	ProjectSection(SolutionItems) = preProject
+		RingMakerPrivacyPolicy.md = RingMakerPrivacyPolicy.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
