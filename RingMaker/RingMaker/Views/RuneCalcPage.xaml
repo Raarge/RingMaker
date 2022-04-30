@@ -19,8 +19,8 @@
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -118,23 +118,60 @@
             FontAttributes="Bold"
             HorizontalTextAlignment="Center"
             FontSize="Title"
-            Text="Runes Required"
+            Text="Runes Required and Defenses Gained"
             TextColor="Goldenrod"
             VerticalTextAlignment="Center"
             VerticalOptions="FillAndExpand" />
 
             <Label
+                x:Name="CalcResultLabel"
+                Text="Runes Required"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                IsVisible="False" 
+                Grid.Row="6"
+                Grid.Column="0"
+                BackgroundColor="White"
+                TextColor="Black"
+                HorizontalTextAlignment="Start"
+                VerticalTextAlignment="Center"/>
+
+            <Label
                 x:Name="CalcResults"
                 Text="{Binding RunesRequired, Mode=OneWay}"
-                FontAttributes="Bold"
                 FontSize="Medium"
                 IsVisible="False"
                 Grid.Row="6"
-                Grid.Column="0"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"
+                Grid.Column="1"
                 BackgroundColor="White"
-                TextColor="Black" />
+                TextColor="Black" 
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"/>
+
+            <Label
+                x:Name="PhysDefLabel"
+                Grid.Row="7"
+                Grid.Column="0"
+                Text="Physical Def Gained"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                IsVisible="False"
+                BackgroundColor="White"
+                TextColor="Black" 
+                HorizontalTextAlignment="Start" 
+                VerticalTextAlignment="Center"/>
+
+            <Label
+                x:Name="PhysDefResult"
+                Grid.Row="7"
+                Grid.Column="1"
+                Text="{Binding PhysDefGained, Mode=OneWay}"
+                FontSize="Medium"
+                IsVisible="False"
+                BackgroundColor="White"
+                TextColor="Black" 
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"/>
 
         </Grid>
     </StackLayout>

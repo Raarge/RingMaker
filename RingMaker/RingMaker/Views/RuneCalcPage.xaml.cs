@@ -22,7 +22,8 @@ namespace RingMaker.Views
             {
                 LevelFrom = Convert.ToInt32(startLevel.Text),
                 LevelTo = Convert.ToInt32(endLevel.Text),
-                RunesRequired = ""
+                RunesRequired = 0,
+                PhysDefGained = 0.0
             };
 
         }
@@ -30,13 +31,18 @@ namespace RingMaker.Views
         private void Button_Clicked(object sender, EventArgs e)
         {
 
-            RuneCalc.RunesRequired = CreateRunesRequiredString(startLevel.Text, endLevel.Text);
+            RuneCalc.RunesRequired = CreateRunesRequiredInt(startLevel.Text, endLevel.Text);
+            RuneCalc.PhysDefGained = CreatePhysicalDefensiveStatImprovementsMinusStatBonus(startLevel.Text, endLevel.Text);
 
             if (Convert.ToInt32(startLevel.Text) > 0 && Convert.ToInt32(startLevel.Text) < Convert.ToInt32(endLevel.Text))
             {
 
                 CalcResults.IsVisible = true;
-                CalcResults.Text = RuneCalc.RunesRequired;
+                PhysDefLabel.IsVisible = true;
+                PhysDefResult.IsVisible = true;
+                CalcResultLabel.IsVisible = true;
+                CalcResults.Text = Convert.ToString(RuneCalc.RunesRequired);
+                PhysDefResult.Text = Convert.ToString(RuneCalc.PhysDefGained);
 
 
             }
@@ -48,21 +54,19 @@ namespace RingMaker.Views
 
         private void Reset_Clicked(object sender, EventArgs e)
         {
+            CalcResultLabel.IsVisible = false;
             CalcResults.IsVisible = false;
             CalcResults.Text = "";
+            PhysDefLabel.IsVisible = false;
+            PhysDefResult.IsVisible = false;
+            PhysDefResult.Text = "";
             startLevel.Text = String.Empty;
             endLevel.Text = String.Empty;
         }
 
-        public string CreateRunesRequiredString(string start, string end)
+        public int CreateRunesRequiredInt(string start, string end)
         {
-            var runeNeededStatement = "";
-            var runeStatement1 = "To go from level ";
-            var runeStatement3 = ", to level ";
-            var runeStatement5 = ". \r\nRequires ";
-            var runeStatement6 = " runes.";
-            var startExp = 0;
-            var endExp = 0;
+            var runeNeeded = 0;
             var neededExp = 0;
 
             var OneToTweve = new Dictionary<int, int>()
@@ -81,7 +85,7 @@ namespace RingMaker.Views
                 { 12, 847 },
             };
 
-            if (start == null && end == null && Convert.ToInt32( end) < 713)
+            if (start == null && end == null && Convert.ToInt32(end) < 713)
             {
                 DisplayAlert("Alert", "You did not enter valid value for Level From or Level To!", "Ok");
             }
@@ -126,11 +130,138 @@ namespace RingMaker.Views
 
 
 
-            runeNeededStatement = runeStatement1 + start + runeStatement3 + end + runeStatement5 + neededExp + runeStatement6;
+            runeNeeded = neededExp;
 
-            return runeNeededStatement;
+            return runeNeeded;
         }
 
+        public double CreatePhysicalDefensiveStatImprovementsMinusStatBonus(string start, string end)
+        {
+            var physicalDefenseGained = 0.0;
+            var one_OneFiftyPhy = .4;
+            var oneFiftyOne_OneSeventyPhy = 1.0;
+            var oneSeventyOne_TwoFourtyPhy = .21;
+            var twoFourtyOne_SevenThirteenPhy = .04;
+            var startFrom = Convert.ToDouble(start);
+            var endOn = Convert.ToDouble(end);
+            var physicalDefGained = 0.0;
+
+            #region OneToSevenThirteen
+            if (startFrom <= 150.0 && endOn < 151.0)
+            {
+                var numberToCalculate = 0.0;
+
+                numberToCalculate = endOn - startFrom;
+
+                physicalDefGained = one_OneFiftyPhy * numberToCalculate;
+
+            }
+            else if (startFrom <= 150.0 && endOn >= 151 && endOn < 171.0)
+            {
+                var belowOneFiftyNumber = 151.0 - startFrom;
+                var aboveOneFiftyNumber = endOn - 151.0;
+
+                physicalDefGained = belowOneFiftyNumber * one_OneFiftyPhy;
+                physicalDefGained += aboveOneFiftyNumber * oneFiftyOne_OneSeventyPhy;
+
+            }
+            else if (startFrom <= 150.0 && endOn >= 171 && endOn < 241.0)
+            {
+                var belowOneFifty = 151.0 - startFrom;
+                var aboveOneFiftyOne = 170.0 - 151.0;
+                var aboveOneSeventyOne = endOn - 170.0;
+
+                physicalDefGained = belowOneFifty * one_OneFiftyPhy;
+                physicalDefGained += oneFiftyOne_OneSeventyPhy * aboveOneFiftyOne;
+                physicalDefGained += aboveOneSeventyOne * oneSeventyOne_TwoFourtyPhy;
+
+            }
+            else if (startFrom <= 150 && endOn >= 241.0 & endOn <= 713.0)
+            {
+                var belowOneFifty = 151.0 - startFrom;
+                var aboveOneFifty = 170.0 - 151.0;
+                var aboveOneSeventyOne = 240.0 - 171.0;
+                var aboveTwoFourtyOne = endOn - 240.0;
+
+                physicalDefGained = belowOneFifty * one_OneFiftyPhy;
+                physicalDefGained += aboveOneFifty * oneFiftyOne_OneSeventyPhy;
+                physicalDefGained += aboveOneSeventyOne * oneSeventyOne_TwoFourtyPhy;
+                physicalDefGained += aboveTwoFourtyOne * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+            #region OneFiftyOneToSevenThirteen
+            else if (startFrom >= 151.0 && endOn >150.0 && endOn < 171.0)
+            {
+                var belowOneSeventy = endOn - startFrom;
+
+                physicalDefGained = belowOneSeventy * oneFiftyOne_OneSeventyPhy;
+            }
+            else if (startFrom >= 151.0 && startFrom < 171.0 && endOn > 170.0 && endOn < 241.0)
+            {
+                var belowOneSeventyOne = 171.0 - startFrom;
+                var belowTwoFourtyOne = 241.0 - endOn;
+
+                physicalDefGained = belowOneSeventyOne * oneFiftyOne_OneSeventyPhy;
+                physicalDefGained += belowTwoFourtyOne * oneSeventyOne_TwoFourtyPhy;
+            }
+            else if ( startFrom >= 151.0 && startFrom < 171.0 && endOn > 240.0 && endOn <= 714.0)
+            {
+                var belowOneSeventyOne = 171.0 - startFrom;
+                var belowTwoFourtyOne = 241.0 - 171.0;
+                var belowOrEqualToSevenThirteen = 714.0 - endOn;
+
+                physicalDefGained = belowOneSeventyOne * oneFiftyOne_OneSeventyPhy;
+                physicalDefGained += belowTwoFourtyOne * oneSeventyOne_TwoFourtyPhy;
+                physicalDefGained += belowOrEqualToSevenThirteen * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+            #region OneSeventyToTwoFourty
+            else if (startFrom >= 171.0 && endOn < 241.0)
+            {
+                var belowTwoFourty = endOn - startFrom;
+                
+                physicalDefGained = belowTwoFourty * oneSeventyOne_TwoFourtyPhy;
+            }
+            else if (startFrom >= 171.0 && startFrom < 241 && endOn > 240 && endOn < 714.0)
+            {
+                var belowtwoFourty = 241.0 - startFrom;
+                var belowSevenThirteen = 714 - endOn;
+
+                physicalDefGained = belowtwoFourty * oneSeventyOne_TwoFourtyPhy;
+                physicalDefGained += belowSevenThirteen * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+            #region TwoFourtytoSevenThirteen
+            else if (startFrom >= 241.0 && endOn < 714.0)
+            {
+                var belowTwoFourty = endOn - startFrom;
+
+                physicalDefGained = belowTwoFourty * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+
+            physicalDefenseGained = physicalDefGained;
+
+            return physicalDefenseGained;
+
+        }
+
+        public string CreateOtherDefensiveGainedStatement(string start, string end)
+        {
+            var otherDefenseGainedStatement = "";
+            var one_OneFiftyOther = .2;
+            var oneFiftyOne_OneNinetyOther = 1.0;
+            var oneNinetyOne_twofourtyOther = .3;
+            var twoFourtyOne_SevenThirteenOther = .04;
+
+
+
+            return otherDefenseGainedStatement;
+        }
         public void entryTextChanged(object sender, EventArgs e)
         {
             if (startLevel.Text.Length > 0 && endLevel.Text.Length > 0 && endLevel.Text.Length < 713)
