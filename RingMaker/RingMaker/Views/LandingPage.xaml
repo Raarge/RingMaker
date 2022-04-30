@@ -23,7 +23,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             HorizontalOptions="FillAndExpand"
-            Source="RingMakerERMain.png"
+            Source="FantasyTree.jpg"
             VerticalOptions="FillAndExpand" />
         <Label
             Grid.Row="0"
@@ -42,9 +42,18 @@
             FontAttributes="Bold"
             FontSize="Title"
             HorizontalTextAlignment="Center"
-            Text="An Elden Ring Souls Calculation Tool"
+            Text="A Rune Calculation Tool"
             TextColor="Goldenrod"
             VerticalTextAlignment="Start"/>
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            Text="eL33t G33kr3 © 2022"
+            TextColor="Goldenrod"
+            />
     </Grid>
     
 </ContentPage>

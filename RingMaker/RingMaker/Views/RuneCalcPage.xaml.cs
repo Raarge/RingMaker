@@ -95,14 +95,14 @@ namespace RingMaker.Views
             }
             else if (Convert.ToInt32(start) <= 12 && Convert.ToInt32(end) <= 12)
             {
-                for (int i = Convert.ToInt32(start); i <= Convert.ToInt32(end); i++)
+                for (int i = Convert.ToInt32(start) + 1; i <= Convert.ToInt32(end); i++)
                 {
                     neededExp += OneToTweve[i];
                 }
             }
             else if (Convert.ToInt32(start) <= 12 && Convert.ToInt32(end) > 12)
             {
-                for (int i = Convert.ToInt32(start); i <= 12; i++)
+                for (int i = Convert.ToInt32(start) + 1; i <= 12; i++)
                 {
                     neededExp += OneToTweve[i];
                 }
@@ -114,7 +114,7 @@ namespace RingMaker.Views
             }
             else if (Convert.ToInt32(start) > 12 && Convert.ToInt32(end) <= 713)
             {
-                for (int i = Convert.ToInt32(start); i <= Convert.ToInt32(end); i++)
+                for (int i = Convert.ToInt32(start) + 1; i <= Convert.ToInt32(end); i++)
                 {
                     neededExp += (Int32)(0.02 * Math.Pow(i, 3) + 3.06 * Math.Pow(i, 2) + 105.6 * i - 895);
                 }

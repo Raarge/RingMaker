@@ -35,7 +35,7 @@
             Grid.RowSpan="2"
             Margin="10,5,10,5"
             HorizontalOptions="Center"
-            Text="Ring Maker is a rune calculation tool produced by Darin Campbell.  It is produced (as is) by eL33t g33kr3 application development. This application is in no way affiliated with FROM SOFTWARE or Elden Ring."
+            Text="Ring Maker is a rune calculation tool produced by Darin Campbell.  It is produced (as is) by eL33t g33kr3 application development."
             TextColor="white"/>
         <Image
             Grid.Row="3"
