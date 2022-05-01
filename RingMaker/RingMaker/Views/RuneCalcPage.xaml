@@ -10,17 +10,18 @@
         <viewmodels:RuneCalcViewModel/>
     </ContentPage.BindingContext>
 
-    <StackLayout>
+    <ScrollView>
         <Grid Margin="20, 50, 20, 10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="70" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -112,7 +113,7 @@
                 Grid.Column="0" />
 
             <Label
-            Grid.Row="5"
+            Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             FontAttributes="Bold"
@@ -129,7 +130,7 @@
                 FontAttributes="Bold"
                 FontSize="Medium"
                 IsVisible="False" 
-                Grid.Row="6"
+                Grid.Row="5"
                 Grid.Column="0"
                 BackgroundColor="White"
                 TextColor="Black"
@@ -141,7 +142,7 @@
                 Text="{Binding RunesRequired, Mode=OneWay}"
                 FontSize="Medium"
                 IsVisible="False"
-                Grid.Row="6"
+                Grid.Row="5"
                 Grid.Column="1"
                 BackgroundColor="White"
                 TextColor="Black" 
@@ -150,9 +151,9 @@
 
             <Label
                 x:Name="PhysDefLabel"
-                Grid.Row="7"
+                Grid.Row="6"
                 Grid.Column="0"
-                Text="Physical Def Gained"
+                Text="Defenses Gained"
                 FontAttributes="Bold"
                 FontSize="Medium"
                 IsVisible="False"
@@ -163,7 +164,7 @@
 
             <Label
                 x:Name="PhysDefResult"
-                Grid.Row="7"
+                Grid.Row="6"
                 Grid.Column="1"
                 Text="{Binding PhysDefGained, Mode=OneWay}"
                 FontSize="Medium"
@@ -173,6 +174,57 @@
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"/>
 
+            <Label
+                x:Name="OtherDefLabel"
+                Grid.Row="7"
+                Grid.Column="0"
+                Text="Other Def Gained"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                IsVisible="False"
+                BackgroundColor="White"
+                TextColor="Black" 
+                HorizontalTextAlignment="Start" 
+                VerticalTextAlignment="Center"/>
+
+            <Label
+                x:Name="OtherDefResult"
+                Grid.Row="7"
+                Grid.Column="1"
+                Text="{Binding OtherDefGained, Mode=OneWay}"
+                FontSize="Medium"
+                IsVisible="False"
+                BackgroundColor="White"
+                TextColor="Black" 
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"/>
+
+            <Button
+                x:Name="btnDefInfo"
+                Clicked="DefInfo_Clicked"
+                Text="Defense Info"
+                TextColor="Black"
+                BackgroundColor="Goldenrod"
+                BorderRadius="20"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="8"
+                Grid.Column="0" 
+                IsVisible="False"/>
+
+            <Button
+                x:Name="btnOtherInfo"
+                Clicked="OtherInfo_Clicked"
+                Text="Other Defense Info"
+                TextColor="Black"
+                BackgroundColor="Goldenrod"
+                BorderRadius="20"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="8"
+                Grid.Column="1" 
+                IsVisible="False"/>
+
         </Grid>
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

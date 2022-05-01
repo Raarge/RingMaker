@@ -33,6 +33,7 @@ namespace RingMaker.Views
 
             RuneCalc.RunesRequired = CreateRunesRequiredInt(startLevel.Text, endLevel.Text);
             RuneCalc.PhysDefGained = CreatePhysicalDefensiveStatImprovementsMinusStatBonus(startLevel.Text, endLevel.Text);
+            RuneCalc.OtherDefGained = CreateOtherDefensiveGainedMinusStatBonus(startLevel.Text, endLevel.Text);
 
             if (Convert.ToInt32(startLevel.Text) > 0 && Convert.ToInt32(startLevel.Text) < Convert.ToInt32(endLevel.Text))
             {
@@ -40,9 +41,14 @@ namespace RingMaker.Views
                 CalcResults.IsVisible = true;
                 PhysDefLabel.IsVisible = true;
                 PhysDefResult.IsVisible = true;
+                OtherDefLabel.IsVisible = true;
+                OtherDefResult.IsVisible = true;
                 CalcResultLabel.IsVisible = true;
+                btnDefInfo.IsVisible = true;
+                btnOtherInfo.IsVisible = true;
                 CalcResults.Text = Convert.ToString(RuneCalc.RunesRequired);
                 PhysDefResult.Text = Convert.ToString(RuneCalc.PhysDefGained);
+                OtherDefResult.Text = Convert.ToString(RuneCalc.OtherDefGained);
 
 
             }
@@ -60,6 +66,11 @@ namespace RingMaker.Views
             PhysDefLabel.IsVisible = false;
             PhysDefResult.IsVisible = false;
             PhysDefResult.Text = "";
+            OtherDefResult.IsVisible = false;
+            OtherDefLabel.IsVisible = false;
+            OtherDefResult.Text = "";
+            btnDefInfo.IsVisible = false;
+            btnOtherInfo.IsVisible = false;
             startLevel.Text = String.Empty;
             endLevel.Text = String.Empty;
         }
@@ -200,7 +211,7 @@ namespace RingMaker.Views
             else if (startFrom >= 151.0 && startFrom < 171.0 && endOn > 170.0 && endOn < 241.0)
             {
                 var belowOneSeventyOne = 171.0 - startFrom;
-                var belowTwoFourtyOne = 241.0 - endOn;
+                var belowTwoFourtyOne = endOn - 171.0;
 
                 physicalDefGained = belowOneSeventyOne * oneFiftyOne_OneSeventyPhy;
                 physicalDefGained += belowTwoFourtyOne * oneSeventyOne_TwoFourtyPhy;
@@ -209,7 +220,7 @@ namespace RingMaker.Views
             {
                 var belowOneSeventyOne = 171.0 - startFrom;
                 var belowTwoFourtyOne = 241.0 - 171.0;
-                var belowOrEqualToSevenThirteen = 714.0 - endOn;
+                var belowOrEqualToSevenThirteen = endOn - 241.0;
 
                 physicalDefGained = belowOneSeventyOne * oneFiftyOne_OneSeventyPhy;
                 physicalDefGained += belowTwoFourtyOne * oneSeventyOne_TwoFourtyPhy;
@@ -250,17 +261,115 @@ namespace RingMaker.Views
 
         }
 
-        public string CreateOtherDefensiveGainedStatement(string start, string end)
+        public double CreateOtherDefensiveGainedMinusStatBonus(string start, string end)
         {
-            var otherDefenseGainedStatement = "";
+            var otherDefenseGained = 0.0;
+            var otherDefGained = 0.0;
             var one_OneFiftyOther = .2;
             var oneFiftyOne_OneNinetyOther = 1.0;
             var oneNinetyOne_twofourtyOther = .3;
             var twoFourtyOne_SevenThirteenOther = .04;
+            var startFrom = Convert.ToDouble(start);
+            var endFrom = Convert.ToDouble(end);
 
 
+            #region One_OneFifty
+            if(startFrom > 0 && startFrom <= 150 && endFrom <= 150)
+            {
+                var belowOneFiftyOne = endFrom - startFrom + 1;
 
-            return otherDefenseGainedStatement;
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+            }
+            else if(startFrom > 0 && startFrom <= 150 && endFrom >= 151 && endFrom < 191)
+            {
+                var belowOneFiftyOne = 151 - startFrom;
+                var belowOneNinetyOne = 191 - endFrom;
+
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+                otherDefGained += belowOneNinetyOne * oneFiftyOne_OneNinetyOther;
+            }
+            else if(startFrom > 0 && startFrom <= 150 && endFrom >= 191 && endFrom < 241)
+            {
+                var belowOneFiftyOne = 151 - startFrom;
+                var belowOneNinetyOne = 191 - 151;
+                var belowtwoFourtyOne = endFrom - 191;
+
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+                otherDefGained += belowOneNinetyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += belowtwoFourtyOne * oneNinetyOne_twofourtyOther;
+
+            }
+            else if(startFrom > 0 && startFrom <= 150 && endFrom >= 241 && endFrom < 714)
+            {
+                var belowOneFiftyOne = 151 - startFrom;
+                var belowOneNinetyOne = 191 - 151;
+                var belowtwoFourtyOne = 241 - 191;
+                var belowSevenFourteen = endFrom - 241;
+
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+                otherDefGained += belowOneNinetyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += belowtwoFourtyOne * oneNinetyOne_twofourtyOther;
+                otherDefGained += belowSevenFourteen * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            #region OneFifty_OneNinety
+            else if(startFrom > 150 && startFrom <= 190 && endFrom >= 151 && endFrom < 191)
+            {
+                var aboveOneFiftyOne = endFrom - startFrom + 1;
+
+                otherDefGained = aboveOneFiftyOne * oneFiftyOne_OneNinetyOther;
+                
+            }
+            else if(startFrom > 150 && startFrom <= 190 && endFrom >= 191 && endFrom < 241)
+            {
+                var aboveOneFiftyOne = 191 - startFrom;
+                var aboveOneNinetyOne = endFrom - 191;
+
+                otherDefGained = aboveOneFiftyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+            }
+            else if(startFrom > 150 && startFrom <= 190 && endFrom >= 241 && endFrom < 714)
+            {
+                var aboveOneFiftyOne = 191 - startFrom;
+                var aboveOneNinetyOne = 241 - 191;
+                var aboveTwoFourtyOne = endFrom - 241;
+
+                otherDefGained = aboveOneFiftyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+                otherDefGained += aboveTwoFourtyOne * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            #region OneNinety_TwoFourty
+            else if(startFrom > 190 && startFrom <= 240 && endFrom >= 191 && endFrom < 241)
+            {
+                var aboveOneNinetyOne = endFrom - startFrom + 1;
+
+                otherDefGained += aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+            }
+            else if(startFrom > 190 && startFrom <= 240 && endFrom >= 241 && endFrom < 714)
+            {
+                var aboveOneNinetyOne = 241 - startFrom;
+                var aboveTwoFourtyOne = endFrom - 241;
+
+                otherDefGained = aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+                otherDefGained += aboveTwoFourtyOne * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            #region TwoFourtyOne_SevenThirteen
+            else if(startFrom > 240 && startFrom <= 713 && endFrom > 241 && endFrom < 714)
+            {
+                var aboveTwoFourtyOne = endFrom - startFrom;
+
+                otherDefGained = aboveTwoFourtyOne * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            otherDefenseGained = otherDefGained;
+
+            return otherDefenseGained;
         }
         public void entryTextChanged(object sender, EventArgs e)
         {
@@ -268,6 +377,16 @@ namespace RingMaker.Views
             {
                 btnCalculateButton.IsEnabled = true;
             }
+        }
+
+        public void DefInfo_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Defensive Information", "Defenses includes the following: \n- Physical Defense (VS Slash/Strike/Pierce)\n- Magic Defense\n- Fire Defense\n- Lightning Defense\n- Holy Defense\n\nNOTE: These figures do not include\n bonuses provided by stats.", "Ok");
+        }
+
+        public void OtherInfo_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Other Defense Information", "Other Defenses include the following: \n - Immunity\n- Robustness\n- Focus\n- Vitality\n\nNOTE: These figures do not include\n bonuses provided by stats.", "Ok");
         }
     }
 }

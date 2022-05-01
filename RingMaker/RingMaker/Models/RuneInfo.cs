@@ -11,6 +11,7 @@ namespace RingMaker.Models
         private int _levelTo;
         private int _runesRequired;
         private double _physDefGained;
+        private double _otherDefGained;
 
         public int LevelFrom 
         { 
@@ -49,6 +50,16 @@ namespace RingMaker.Models
             {
                 _physDefGained = value;
                 RaisePropertyChanged(nameof(PhysDefGained));
+            }
+        }
+
+        public double OtherDefGained
+        {
+            get => _otherDefGained;
+            set
+            {
+                _otherDefGained = value;
+                RaisePropertyChanged(nameof(OtherDefGained));
             }
         }
 

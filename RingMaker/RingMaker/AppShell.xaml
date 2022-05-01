@@ -91,8 +91,6 @@
     </FlyoutItem>
     <FlyoutItem Title="Rune Calculation Page" Icon="Icon_feed.png">
         <ShellContent ContentTemplate="{DataTemplate local:RuneCalcPage}" Route="RunCalcPage" />
-    </FlyoutItem><FlyoutItem Title="Rune Calculation Page" Icon="Icon_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:DefenseCalcPage}" Route="DefenseCalcPage" />
     </FlyoutItem>    
     <FlyoutItem Title="About" Icon="icon_about.png">
         <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
