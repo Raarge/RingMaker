@@ -9,7 +9,9 @@ namespace RingMaker.Models
     {
         private int _levelFrom;
         private int _levelTo;
-        private string _runesRequired;
+        private int _runesRequired;
+        private double _physDefGained;
+        private double _otherDefGained;
 
         public int LevelFrom 
         { 
@@ -31,13 +33,33 @@ namespace RingMaker.Models
             }
         }
 
-        public string RunesRequired 
+        public int RunesRequired 
         { 
             get => _runesRequired;
             set 
             {
                 _runesRequired = value;
                 RaisePropertyChanged(nameof(RunesRequired));
+            }
+        }
+
+        public double PhysDefGained
+        {
+            get => _physDefGained;
+            set
+            {
+                _physDefGained = value;
+                RaisePropertyChanged(nameof(PhysDefGained));
+            }
+        }
+
+        public double OtherDefGained
+        {
+            get => _otherDefGained;
+            set
+            {
+                _otherDefGained = value;
+                RaisePropertyChanged(nameof(OtherDefGained));
             }
         }
 

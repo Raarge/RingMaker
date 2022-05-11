@@ -22,7 +22,8 @@ namespace RingMaker.Views
             {
                 LevelFrom = Convert.ToInt32(startLevel.Text),
                 LevelTo = Convert.ToInt32(endLevel.Text),
-                RunesRequired = ""
+                RunesRequired = 0,
+                PhysDefGained = 0.0
             };
 
         }
@@ -30,13 +31,24 @@ namespace RingMaker.Views
         private void Button_Clicked(object sender, EventArgs e)
         {
 
-            RuneCalc.RunesRequired = CreateRunesRequiredString(startLevel.Text, endLevel.Text);
+            RuneCalc.RunesRequired = CreateRunesRequiredInt(startLevel.Text, endLevel.Text);
+            RuneCalc.PhysDefGained = CreatePhysicalDefensiveStatImprovementsMinusStatBonus(startLevel.Text, endLevel.Text);
+            RuneCalc.OtherDefGained = CreateOtherDefensiveGainedMinusStatBonus(startLevel.Text, endLevel.Text);
 
             if (Convert.ToInt32(startLevel.Text) > 0 && Convert.ToInt32(startLevel.Text) < Convert.ToInt32(endLevel.Text))
             {
 
                 CalcResults.IsVisible = true;
-                CalcResults.Text = RuneCalc.RunesRequired;
+                PhysDefLabel.IsVisible = true;
+                PhysDefResult.IsVisible = true;
+                OtherDefLabel.IsVisible = true;
+                OtherDefResult.IsVisible = true;
+                CalcResultLabel.IsVisible = true;
+                btnDefInfo.IsVisible = true;
+                btnOtherInfo.IsVisible = true;
+                CalcResults.Text = Convert.ToString(RuneCalc.RunesRequired);
+                PhysDefResult.Text = Convert.ToString(RuneCalc.PhysDefGained);
+                OtherDefResult.Text = Convert.ToString(RuneCalc.OtherDefGained);
 
 
             }
@@ -48,21 +60,24 @@ namespace RingMaker.Views
 
         private void Reset_Clicked(object sender, EventArgs e)
         {
+            CalcResultLabel.IsVisible = false;
             CalcResults.IsVisible = false;
             CalcResults.Text = "";
+            PhysDefLabel.IsVisible = false;
+            PhysDefResult.IsVisible = false;
+            PhysDefResult.Text = "";
+            OtherDefResult.IsVisible = false;
+            OtherDefLabel.IsVisible = false;
+            OtherDefResult.Text = "";
+            btnDefInfo.IsVisible = false;
+            btnOtherInfo.IsVisible = false;
             startLevel.Text = String.Empty;
             endLevel.Text = String.Empty;
         }
 
-        public string CreateRunesRequiredString(string start, string end)
+        public int CreateRunesRequiredInt(string start, string end)
         {
-            var runeNeededStatement = "";
-            var runeStatement1 = "To go from level ";
-            var runeStatement3 = ", to level ";
-            var runeStatement5 = ". \r\nRequires ";
-            var runeStatement6 = " runes.";
-            var startExp = 0;
-            var endExp = 0;
+            var runeNeeded = 0;
             var neededExp = 0;
 
             var OneToTweve = new Dictionary<int, int>()
@@ -81,7 +96,7 @@ namespace RingMaker.Views
                 { 12, 847 },
             };
 
-            if (start == null && end == null && Convert.ToInt32( end) < 713)
+            if (start == null && end == null && Convert.ToInt32(end) < 713)
             {
                 DisplayAlert("Alert", "You did not enter valid value for Level From or Level To!", "Ok");
             }
@@ -126,17 +141,252 @@ namespace RingMaker.Views
 
 
 
-            runeNeededStatement = runeStatement1 + start + runeStatement3 + end + runeStatement5 + neededExp + runeStatement6;
+            runeNeeded = neededExp;
 
-            return runeNeededStatement;
+            return runeNeeded;
         }
 
+        public double CreatePhysicalDefensiveStatImprovementsMinusStatBonus(string start, string end)
+        {
+            var physicalDefenseGained = 0.0;
+            var one_OneFiftyPhy = .4;
+            var oneFiftyOne_OneSeventyPhy = 1.0;
+            var oneSeventyOne_TwoFourtyPhy = .21;
+            var twoFourtyOne_SevenThirteenPhy = .04;
+            var startFrom = Convert.ToDouble(start);
+            var endOn = Convert.ToDouble(end);
+            var physicalDefGained = 0.0;
+
+            #region OneToSevenThirteen
+            if (startFrom <= 150.0 && endOn < 151.0)
+            {
+                var numberToCalculate = 0.0;
+
+                numberToCalculate = endOn - startFrom;
+
+                physicalDefGained = one_OneFiftyPhy * numberToCalculate;
+
+            }
+            else if (startFrom <= 150.0 && endOn >= 151 && endOn < 171.0)
+            {
+                var belowOneFiftyNumber = 151.0 - startFrom;
+                var aboveOneFiftyNumber = endOn - 151.0;
+
+                physicalDefGained = belowOneFiftyNumber * one_OneFiftyPhy;
+                physicalDefGained += aboveOneFiftyNumber * oneFiftyOne_OneSeventyPhy;
+
+            }
+            else if (startFrom <= 150.0 && endOn >= 171 && endOn < 241.0)
+            {
+                var belowOneFifty = 151.0 - startFrom;
+                var aboveOneFiftyOne = 170.0 - 151.0;
+                var aboveOneSeventyOne = endOn - 170.0;
+
+                physicalDefGained = belowOneFifty * one_OneFiftyPhy;
+                physicalDefGained += oneFiftyOne_OneSeventyPhy * aboveOneFiftyOne;
+                physicalDefGained += aboveOneSeventyOne * oneSeventyOne_TwoFourtyPhy;
+
+            }
+            else if (startFrom <= 150 && endOn >= 241.0 & endOn <= 713.0)
+            {
+                var belowOneFifty = 151.0 - startFrom;
+                var aboveOneFifty = 170.0 - 151.0;
+                var aboveOneSeventyOne = 240.0 - 171.0;
+                var aboveTwoFourtyOne = endOn - 240.0;
+
+                physicalDefGained = belowOneFifty * one_OneFiftyPhy;
+                physicalDefGained += aboveOneFifty * oneFiftyOne_OneSeventyPhy;
+                physicalDefGained += aboveOneSeventyOne * oneSeventyOne_TwoFourtyPhy;
+                physicalDefGained += aboveTwoFourtyOne * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+            #region OneFiftyOneToSevenThirteen
+            else if (startFrom >= 151.0 && endOn >150.0 && endOn < 171.0)
+            {
+                var belowOneSeventy = endOn - startFrom;
+
+                physicalDefGained = belowOneSeventy * oneFiftyOne_OneSeventyPhy;
+            }
+            else if (startFrom >= 151.0 && startFrom < 171.0 && endOn > 170.0 && endOn < 241.0)
+            {
+                var belowOneSeventyOne = 171.0 - startFrom;
+                var belowTwoFourtyOne = endOn - 171.0;
+
+                physicalDefGained = belowOneSeventyOne * oneFiftyOne_OneSeventyPhy;
+                physicalDefGained += belowTwoFourtyOne * oneSeventyOne_TwoFourtyPhy;
+            }
+            else if ( startFrom >= 151.0 && startFrom < 171.0 && endOn > 240.0 && endOn <= 714.0)
+            {
+                var belowOneSeventyOne = 171.0 - startFrom;
+                var belowTwoFourtyOne = 241.0 - 171.0;
+                var belowOrEqualToSevenThirteen = endOn - 241.0;
+
+                physicalDefGained = belowOneSeventyOne * oneFiftyOne_OneSeventyPhy;
+                physicalDefGained += belowTwoFourtyOne * oneSeventyOne_TwoFourtyPhy;
+                physicalDefGained += belowOrEqualToSevenThirteen * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+            #region OneSeventyToTwoFourty
+            else if (startFrom >= 171.0 && endOn < 241.0)
+            {
+                var belowTwoFourty = endOn - startFrom;
+                
+                physicalDefGained = belowTwoFourty * oneSeventyOne_TwoFourtyPhy;
+            }
+            else if (startFrom >= 171.0 && startFrom < 241 && endOn > 240 && endOn < 714.0)
+            {
+                var belowtwoFourty = 241.0 - startFrom;
+                var belowSevenThirteen = 714 - endOn;
+
+                physicalDefGained = belowtwoFourty * oneSeventyOne_TwoFourtyPhy;
+                physicalDefGained += belowSevenThirteen * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+            #region TwoFourtytoSevenThirteen
+            else if (startFrom >= 241.0 && endOn < 714.0)
+            {
+                var belowTwoFourty = endOn - startFrom;
+
+                physicalDefGained = belowTwoFourty * twoFourtyOne_SevenThirteenPhy;
+            }
+            #endregion
+
+
+            physicalDefenseGained = physicalDefGained;
+
+            return physicalDefenseGained;
+
+        }
+
+        public double CreateOtherDefensiveGainedMinusStatBonus(string start, string end)
+        {
+            var otherDefenseGained = 0.0;
+            var otherDefGained = 0.0;
+            var one_OneFiftyOther = .2;
+            var oneFiftyOne_OneNinetyOther = 1.0;
+            var oneNinetyOne_twofourtyOther = .3;
+            var twoFourtyOne_SevenThirteenOther = .04;
+            var startFrom = Convert.ToDouble(start);
+            var endFrom = Convert.ToDouble(end);
+
+
+            #region One_OneFifty
+            if(startFrom > 0 && startFrom <= 150 && endFrom <= 150)
+            {
+                var belowOneFiftyOne = endFrom - startFrom + 1;
+
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+            }
+            else if(startFrom > 0 && startFrom <= 150 && endFrom >= 151 && endFrom < 191)
+            {
+                var belowOneFiftyOne = 151 - startFrom;
+                var belowOneNinetyOne = 191 - endFrom;
+
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+                otherDefGained += belowOneNinetyOne * oneFiftyOne_OneNinetyOther;
+            }
+            else if(startFrom > 0 && startFrom <= 150 && endFrom >= 191 && endFrom < 241)
+            {
+                var belowOneFiftyOne = 151 - startFrom;
+                var belowOneNinetyOne = 191 - 151;
+                var belowtwoFourtyOne = endFrom - 191;
+
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+                otherDefGained += belowOneNinetyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += belowtwoFourtyOne * oneNinetyOne_twofourtyOther;
+
+            }
+            else if(startFrom > 0 && startFrom <= 150 && endFrom >= 241 && endFrom < 714)
+            {
+                var belowOneFiftyOne = 151 - startFrom;
+                var belowOneNinetyOne = 191 - 151;
+                var belowtwoFourtyOne = 241 - 191;
+                var belowSevenFourteen = endFrom - 241;
+
+                otherDefGained = belowOneFiftyOne * one_OneFiftyOther;
+                otherDefGained += belowOneNinetyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += belowtwoFourtyOne * oneNinetyOne_twofourtyOther;
+                otherDefGained += belowSevenFourteen * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            #region OneFifty_OneNinety
+            else if(startFrom > 150 && startFrom <= 190 && endFrom >= 151 && endFrom < 191)
+            {
+                var aboveOneFiftyOne = endFrom - startFrom + 1;
+
+                otherDefGained = aboveOneFiftyOne * oneFiftyOne_OneNinetyOther;
+                
+            }
+            else if(startFrom > 150 && startFrom <= 190 && endFrom >= 191 && endFrom < 241)
+            {
+                var aboveOneFiftyOne = 191 - startFrom;
+                var aboveOneNinetyOne = endFrom - 191;
+
+                otherDefGained = aboveOneFiftyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+            }
+            else if(startFrom > 150 && startFrom <= 190 && endFrom >= 241 && endFrom < 714)
+            {
+                var aboveOneFiftyOne = 191 - startFrom;
+                var aboveOneNinetyOne = 241 - 191;
+                var aboveTwoFourtyOne = endFrom - 241;
+
+                otherDefGained = aboveOneFiftyOne * oneFiftyOne_OneNinetyOther;
+                otherDefGained += aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+                otherDefGained += aboveTwoFourtyOne * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            #region OneNinety_TwoFourty
+            else if(startFrom > 190 && startFrom <= 240 && endFrom >= 191 && endFrom < 241)
+            {
+                var aboveOneNinetyOne = endFrom - startFrom + 1;
+
+                otherDefGained += aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+            }
+            else if(startFrom > 190 && startFrom <= 240 && endFrom >= 241 && endFrom < 714)
+            {
+                var aboveOneNinetyOne = 241 - startFrom;
+                var aboveTwoFourtyOne = endFrom - 241;
+
+                otherDefGained = aboveOneNinetyOne * oneNinetyOne_twofourtyOther;
+                otherDefGained += aboveTwoFourtyOne * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            #region TwoFourtyOne_SevenThirteen
+            else if(startFrom > 240 && startFrom <= 713 && endFrom > 241 && endFrom < 714)
+            {
+                var aboveTwoFourtyOne = endFrom - startFrom;
+
+                otherDefGained = aboveTwoFourtyOne * twoFourtyOne_SevenThirteenOther;
+            }
+            #endregion
+
+            otherDefenseGained = otherDefGained;
+
+            return otherDefenseGained;
+        }
         public void entryTextChanged(object sender, EventArgs e)
         {
             if (startLevel.Text.Length > 0 && endLevel.Text.Length > 0 && endLevel.Text.Length < 713)
             {
                 btnCalculateButton.IsEnabled = true;
             }
+        }
+
+        public void DefInfo_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Defensive Information", "Defenses includes the following: \n- Physical Defense (VS Slash/Strike/Pierce)\n- Magic Defense\n- Fire Defense\n- Lightning Defense\n- Holy Defense\n\nNOTE: These figures do not include\n bonuses provided by stats.", "Ok");
+        }
+
+        public void OtherInfo_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Other Defense Information", "Other Defenses include the following: \n - Immunity\n- Robustness\n- Focus\n- Vitality\n\nNOTE: These figures do not include\n bonuses provided by stats.", "Ok");
         }
     }
 }
