@@ -22,6 +22,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="70" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -147,7 +148,8 @@
                 BackgroundColor="White"
                 TextColor="Black" 
                 HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Center"/>
+                VerticalTextAlignment="Center"
+                />
 
             <Label
                 x:Name="PhysDefLabel"
@@ -224,6 +226,20 @@
                 Grid.Row="8"
                 Grid.Column="1" 
                 IsVisible="False"/>
+
+            <Button
+                x:Name="btnCopyText"
+                Clicked="btnCopytoClipboard_Click"
+                Text="Click to Copy Runes Required"
+                TextColor="Black"
+                BackgroundColor="Goldenrod"
+                BorderRadius="20"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="9"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                IsVisible="False" />
 
         </Grid>
     </ScrollView>
