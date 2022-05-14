@@ -4,32 +4,32 @@
              xmlns:viewmodels="clr-namespace:RingMaker.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="RingMaker.Views.RuneCalcPage"
-             Title="Rune Calculation Page"
+             Title="{Binding Title}"
              BackgroundColor="Black">
     <ContentPage.BindingContext>
         <viewmodels:RuneCalcViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Margin="20, 50, 20, 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-    <ScrollView>
-        <Grid Margin="20, 50, 20, 10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="100" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="40" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-        
-            <Label
+                <Label
             Grid.Row="0"
             Grid.ColumnSpan="2"
             HorizontalOptions="Center"
@@ -39,7 +39,7 @@
             TextColor="Goldenrod"
             VerticalOptions="Center"/>
 
-            <Label
+                <Label
             Grid.Row="1"
             Grid.Column="0"
             FontAttributes="Bold"
@@ -50,7 +50,7 @@
             VerticalTextAlignment="Center"
             VerticalOptions="FillAndExpand" />
 
-            <Entry
+                <Entry
                 x:Name="startLevel"
                 Text="{Binding LevelFrom, Mode=TwoWay}"
                 Placeholder="From Level"
@@ -64,7 +64,7 @@
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center" />
 
-            <Label
+                <Label
             Grid.Row="2"
             Grid.Column="0"
             FontAttributes="Bold"
@@ -75,7 +75,7 @@
             VerticalTextAlignment="Center"
             VerticalOptions="FillAndExpand" />
 
-            <Entry
+                <Entry
                 x:Name="endLevel"
                 Text="{Binding LevelTo, Mode=TwoWay}"
                 Placeholder="Desired Level"
@@ -89,7 +89,7 @@
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center" />
 
-            <Button
+                <Button
                 x:Name="btnCalculateButton"
                 Clicked="Button_Clicked"
                 Text="Calculate Runes" 
@@ -101,7 +101,7 @@
                 Grid.Row="3" 
                 Grid.Column="1"/>
 
-            <Button
+                <Button
                 x:Name="btnResetForm"
                 Clicked="Reset_Clicked"
                 Text="Reset Form"
@@ -113,7 +113,7 @@
                 Grid.Row="3"
                 Grid.Column="0" />
 
-            <Label
+                <Label
             Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -125,7 +125,7 @@
             VerticalTextAlignment="Center"
             VerticalOptions="FillAndExpand" />
 
-            <Label
+                <Label
                 x:Name="CalcResultLabel"
                 Text="Runes Required"
                 FontAttributes="Bold"
@@ -138,7 +138,7 @@
                 HorizontalTextAlignment="Start"
                 VerticalTextAlignment="Center"/>
 
-            <Label
+                <Label
                 x:Name="CalcResults"
                 Text="{Binding RunesRequired, Mode=OneWay}"
                 FontSize="Medium"
@@ -151,7 +151,7 @@
                 VerticalTextAlignment="Center"
                 />
 
-            <Label
+                <Label
                 x:Name="PhysDefLabel"
                 Grid.Row="6"
                 Grid.Column="0"
@@ -164,7 +164,7 @@
                 HorizontalTextAlignment="Start" 
                 VerticalTextAlignment="Center"/>
 
-            <Label
+                <Label
                 x:Name="PhysDefResult"
                 Grid.Row="6"
                 Grid.Column="1"
@@ -176,7 +176,7 @@
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"/>
 
-            <Label
+                <Label
                 x:Name="OtherDefLabel"
                 Grid.Row="7"
                 Grid.Column="0"
@@ -189,7 +189,7 @@
                 HorizontalTextAlignment="Start" 
                 VerticalTextAlignment="Center"/>
 
-            <Label
+                <Label
                 x:Name="OtherDefResult"
                 Grid.Row="7"
                 Grid.Column="1"
@@ -201,7 +201,7 @@
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"/>
 
-            <Button
+                <Button
                 x:Name="btnDefInfo"
                 Clicked="DefInfo_Clicked"
                 Text="Defense Info"
@@ -214,7 +214,7 @@
                 Grid.Column="0" 
                 IsVisible="False"/>
 
-            <Button
+                <Button
                 x:Name="btnOtherInfo"
                 Clicked="OtherInfo_Clicked"
                 Text="Other Defense Info"
@@ -227,7 +227,7 @@
                 Grid.Column="1" 
                 IsVisible="False"/>
 
-            <Button
+                <Button
                 x:Name="btnCopyText"
                 Clicked="btnCopytoClipboard_Click"
                 Text="Click to Copy Runes Required"
@@ -241,6 +241,7 @@
                 Grid.ColumnSpan="2"
                 IsVisible="False" />
 
-        </Grid>
-    </ScrollView>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
