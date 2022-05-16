@@ -30,50 +30,50 @@
                 </Grid.ColumnDefinitions>
 
                 <Label
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            HorizontalOptions="Center"
-            Text="Chose Levels From and To"
-            FontAttributes="Bold"
-            FontSize="Title"
-            TextColor="Goldenrod"
-            VerticalOptions="Center"/>
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalOptions="Center"
+                    Text="Chose Levels From and To"
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    TextColor="Goldenrod"
+                    VerticalOptions="Center"/>
 
                 <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"
-            Text="Enter Starting Level"
-            TextColor="Black"
-            BackgroundColor="White"
-            VerticalTextAlignment="Center"
-            VerticalOptions="FillAndExpand" />
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="Enter Starting Level"
+                    TextColor="Black"
+                    BackgroundColor="White"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="FillAndExpand" />
 
                 <Entry
-                x:Name="startLevel"
-                Text="{Binding LevelFrom, Mode=TwoWay}"
-                Placeholder="From Level"
-                PlaceholderColor="Black"
-                Grid.Row="1"
-                Grid.Column="1"
-                MaxLength="3"
-                Keyboard="Numeric"
-                BackgroundColor="White"
-                TextColor="Black"
-                HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Center" />
+                    x:Name="startLevel"
+                    Text="{Binding LevelFrom, Mode=TwoWay}"
+                    Placeholder="From Level"
+                    PlaceholderColor="Black"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    MaxLength="3"
+                    Keyboard="Numeric"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
 
                 <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"
-            Text="Enter Desired Level"
-            TextColor="Black"
-            BackgroundColor="White"
-            VerticalTextAlignment="Center"
-            VerticalOptions="FillAndExpand" />
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="Enter Desired Level"
+                    TextColor="Black"
+                    BackgroundColor="White"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="FillAndExpand" />
 
                 <Entry
                 x:Name="endLevel"
@@ -114,16 +114,16 @@
                 Grid.Column="0" />
 
                 <Label
-            Grid.Row="4"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"
-            FontSize="Title"
-            Text="Runes Required and Defenses Gained"
-            TextColor="Goldenrod"
-            VerticalTextAlignment="Center"
-            VerticalOptions="FillAndExpand" />
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    FontSize="Title"
+                    Text="Runes Required and Defenses Gained"
+                    TextColor="Goldenrod"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="FillAndExpand" />
 
                 <Label
                 x:Name="CalcResultLabel"
