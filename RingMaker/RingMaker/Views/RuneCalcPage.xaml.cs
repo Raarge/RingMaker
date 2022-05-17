@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using RingMaker.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -44,6 +44,7 @@ namespace RingMaker.Views
                 OtherDefLabel.IsVisible = true;
                 OtherDefResult.IsVisible = true;
                 CalcResultLabel.IsVisible = true;
+                btnCopyText.IsVisible = true;
                 btnDefInfo.IsVisible = true;
                 btnOtherInfo.IsVisible = true;
                 CalcResults.Text = Convert.ToString(RuneCalc.RunesRequired);
@@ -71,8 +72,24 @@ namespace RingMaker.Views
             OtherDefResult.Text = "";
             btnDefInfo.IsVisible = false;
             btnOtherInfo.IsVisible = false;
+            btnCopyText.IsVisible = false;
             startLevel.Text = String.Empty;
             endLevel.Text = String.Empty;
+        }
+
+        private void btnCopytoClipboard_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(CalcResults.Text))
+            {
+                var clipboardService = DependencyService.Get<IClipboardService>();
+                clipboardService?.CopyToClipboard(CalcResults.Text);
+                DisplayAlert("Clipboard", "Text Copied " + CalcResults.Text, "Ok");
+            }
+            else
+            {
+                DisplayAlert("Clipboard", "There was no text to copy", "Ok");
+            }
+
         }
 
         public int CreateRunesRequiredInt(string start, string end)

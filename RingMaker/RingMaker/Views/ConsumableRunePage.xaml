@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:RingMaker.ViewModels"
+    x:Class="RingMaker.Views.ConsumableRunePage"
+    Title="{Binding Title}"
+    BackgroundColor="Black">
+    <ContentPage.BindingContext>
+        <viewmodels:ConsumableRuneViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <Grid Margin="20,50,20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    HorizontalOptions="Center"
+                    Text="Enter/Paste Runes Needed"
+                    TextColor="Goldenrod"
+                    VerticalOptions="Center" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    Text="Enter Runes Needed"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"/>
+
+                <Entry
+                    x:Name="xpNeeded"
+                    Text="{Binding XPNeeded}"
+                    Placeholder="Enter Runes Needed"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    PlaceholderColor="Black"
+                    BackgroundColor="White"
+                    Keyboard="Numeric"
+                    TextColor="Black"
+                />
+
+
+                <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    HorizontalTextAlignment="Center"
+                    Text="Choose Consumable Rune"
+                    TextColor="Goldenrod"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    Text="Pick a Consumable Rune:"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"/>
+                
+
+                <Picker 
+                    x:Name="pkrRuneSize"
+                    Title="Pick a Rune:"
+                    TitleColor="Black"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Background="white"
+                    TextColor="black">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Lord's Rune</x:String>
+                            <x:String>Hero's Rune[5]</x:String>
+                            <x:String>Hero's Rune[4]</x:String>
+                            <x:String>Hero's Rune[3]</x:String>
+                            <x:String>Hero's Rune[2]</x:String>
+                            <x:String>Hero's Rune[1]</x:String>
+                            <x:String>Numen's Rune</x:String>
+                            <x:String>Golden Rune[13]</x:String>
+                            <x:String>Golden Rune[12]</x:String>
+                            <x:String>Golden Rune[11]</x:String>
+                            <x:String>Golden Rune[10]</x:String>
+                            <x:String>Golden Rune[9]</x:String>
+                            <x:String>Golden Rune[8]</x:String>
+                            <x:String>Golden Rune[7]</x:String>
+                            <x:String>Golden Rune[6]</x:String>
+                            <x:String>Golden Rune[5]</x:String>
+                            <x:String>Golden Rune[4]</x:String>
+                            <x:String>Golden Rune[3]</x:String>
+                            <x:String>Golden Rune[2]</x:String>
+                            <x:String>Golden Rune[1]</x:String>
+                            <x:String>Lands Between Rune</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Button
+                    x:Name="btnCalculateNumberOfRunes"
+                    Clicked="btnCalculateNumberOfRunes_Clicked"
+                    Text="Click to Calculate Number of Chosen Consumable Runes Needed"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    TextColor="Black"
+                    BackgroundColor="Goldenrod"
+                    BorderRadius="20"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
+
+                <Button
+                    x:Name="btnReset"
+                    Clicked="btnReset_Clicked"
+                    Text="Reset the Consumable Runes Calculator"
+                    IsVisible="false"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    TextColor="Black"
+                    BackgroundColor="Goldenrod"
+                    BorderRadius="20"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
+
+                <Label
+                    x:Name="lblRunesNeededHeader"
+                    Grid.Row="6"
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    IsVisible="false"
+                    HorizontalTextAlignment="Center"
+                    Text="Number of Consumable Runes Needed"
+                    TextColor="Goldenrod"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    x:Name="lblRunesNeededResults"
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Bold"
+                    IsVisible="false"
+                    Text="{Binding ConsumableRunesRequired}"
+                    TextColor="white" />
+                
+                
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
