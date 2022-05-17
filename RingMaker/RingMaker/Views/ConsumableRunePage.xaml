@@ -20,6 +20,7 @@
                     <RowDefinition Height="50" />
                     <RowDefinition Height="50" />
                     <RowDefinition Height="70" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="60" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
@@ -130,10 +131,24 @@
                     BorderRadius="20"
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"/>
-                
+
+                <Button
+                    x:Name="btnReset"
+                    Clicked="btnReset_Clicked"
+                    Text="Reset the Consumable Runes Calculator"
+                    IsVisible="false"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    TextColor="Black"
+                    BackgroundColor="Goldenrod"
+                    BorderRadius="20"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
+
                 <Label
                     x:Name="lblRunesNeededHeader"
-                    Grid.Row="5"
+                    Grid.Row="6"
                     Grid.ColumnSpan="2"
                     FontAttributes="Bold"
                     FontSize="Title"
@@ -145,7 +160,7 @@
 
                 <Label
                     x:Name="lblRunesNeededResults"
-                    Grid.Row="6"
+                    Grid.Row="7"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     FontAttributes="Bold"
@@ -153,8 +168,7 @@
                     Text="{Binding ConsumableRunesRequired}"
                     TextColor="white" />
                 
-                <!--add a reset button here-->
-
+                
             </Grid>
         </StackLayout>
     </ContentPage.Content>
